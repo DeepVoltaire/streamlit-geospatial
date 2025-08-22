@@ -6,7 +6,7 @@ folium==0.13.0
 geemap # NEW
 geemap[extra]
 geopandas
-jupyterlab # NEW
+# jupyterlab # NEW
 jupyter-server-proxy
 keplergl
 leafmap
