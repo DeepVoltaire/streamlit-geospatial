@@ -22,6 +22,9 @@ import tempfile
 def ee_authenticate():
     key_json = st.secrets["EE_KEY_JSON"]
     sa_email = st.secrets["EE_SERVICE_ACCOUNT"]
+    print(f"Token: {os.getenv('EE_KEY_JSON')}")
+    print(f"Token: {os.getenv('EE_SERVICE_ACCOUNT')}")
+    # print(f"Token2: {os.environ}")
     # project = st.secrets.get("EE_PROJECT_ID")
 
     # Write key to a temp file because EE expects a path
@@ -34,15 +37,15 @@ def ee_authenticate():
         service_account=sa_email,
         key_file=key_path,
     )
-    # return True
+    return True
 
 # init_ee_sa()
 
-# @st.cache_data
-# def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
-#     print(f"Token: {os.getenv(token_name)}")
-#     print(f"Token2: {os.environ[token_name]}")
-#     geemap.ee_initialize(token_name=token_name)
+@st.cache_data
+def ee_authenticate2(token_name="EARTHENGINE_TOKEN"):
+    print(f"Token: {os.getenv(token_name)}")
+    print(f"Token2: {os.environ}")
+    geemap.ee_initialize(token_name=token_name)
 
 
 st.sidebar.info(
@@ -276,7 +279,9 @@ def app():
     st.session_state["vis_params"] = None
 
     with row1_col1:
-        ee_authenticate(token_name="EARTHENGINE_TOKEN")
+        # ee_authenticate(token_name="EARTHENGINE_TOKEN")
+        ee_authenticate()
+        ee_authenticate2()
         m = geemap.Map(
             basemap="HYBRID",
             plugin_Draw=True,
