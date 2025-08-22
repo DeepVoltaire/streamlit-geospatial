@@ -1,8 +1,12 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
 # cartopy
+earth-engine-api # NEW
+fiona # NEW
 folium==0.13.0
+geemap # NEW
 geemap[extra]
 geopandas
+jupyterlab # NEW
 jupyter-server-proxy
 keplergl
 leafmap
