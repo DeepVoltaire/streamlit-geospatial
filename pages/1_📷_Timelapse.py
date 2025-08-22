@@ -16,11 +16,33 @@ st.set_page_config(layout="wide")
 warnings.filterwarnings("ignore")
 
 
-@st.cache_data
-def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
-    print(f"Token: {os.getenv(token_name)}")
-    print(f"Token2: {os.environ[token_name]}")
-    geemap.ee_initialize(token_name=token_name)
+import tempfile
+
+@st.cache_resource(show_spinner=False)
+def ee_authenticate():
+    key_json = st.secrets["EE_KEY_JSON"]
+    sa_email = st.secrets["EE_SERVICE_ACCOUNT"]
+    # project = st.secrets.get("EE_PROJECT_ID")
+
+    # Write key to a temp file because EE expects a path
+    with tempfile.NamedTemporaryFile("w", delete=False, suffix=".json") as f:
+        f.write(key_json)
+        key_path = f.name
+
+    geemap.ee_initialize(
+        # project=project,
+        service_account=sa_email,
+        key_file=key_path,
+    )
+    # return True
+
+# init_ee_sa()
+
+# @st.cache_data
+# def ee_authenticate(token_name="EARTHENGINE_TOKEN"):
+#     print(f"Token: {os.getenv(token_name)}")
+#     print(f"Token2: {os.environ[token_name]}")
+#     geemap.ee_initialize(token_name=token_name)
 
 
 st.sidebar.info(
