@@ -1,6 +1,6 @@
 --find-links=https://girder.github.io/large_image_wheels GDAL
 # cartopy
-earth-engine-api # NEW
+earthengine-api # NEW
 fiona # NEW
 folium==0.13.0
 geemap # NEW
