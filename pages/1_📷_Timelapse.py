@@ -280,8 +280,8 @@ def app():
 
     with row1_col1:
         # ee_authenticate(token_name="EARTHENGINE_TOKEN")
-        ee_authenticate2()
         ee_authenticate()
+        ee_authenticate2()
         m = geemap.Map(
             basemap="HYBRID",
             plugin_Draw=True,
